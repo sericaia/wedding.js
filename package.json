@@ -4,7 +4,9 @@
   "description": "share wedding photos like a pro!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_PATH=. node index.js"
+
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/sericaia/wedding.js/issues"
   },
-  "homepage": "https://github.com/sericaia/wedding.js#readme"
+  "homepage": "https://github.com/sericaia/wedding.js#readme",
+  "dependencies": {
+    "getconfig": "^2.1.0",
+    "hapi": "^11.0.1"
+  }
 }
