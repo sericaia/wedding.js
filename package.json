@@ -1,0 +1,19 @@
+{
+  "name": "wedding.js",
+  "version": "1.0.0",
+  "description": "share wedding photos like a pro!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sericaia/wedding.js.git"
+  },
+  "author": "@sericaia, @pmvrmc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sericaia/wedding.js/issues"
+  },
+  "homepage": "https://github.com/sericaia/wedding.js#readme"
+}
