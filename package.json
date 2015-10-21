@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_PATH=. node index.js"
-
   },
   "repository": {
     "type": "git",
@@ -19,7 +18,10 @@
   },
   "homepage": "https://github.com/sericaia/wedding.js#readme",
   "dependencies": {
+    "async": "^1.4.2",
     "getconfig": "^2.1.0",
-    "hapi": "^11.0.1"
+    "hapi": "^11.0.1",
+    "inert": "^3.1.0",
+    "joi": "^6.9.1"
   }
 }
