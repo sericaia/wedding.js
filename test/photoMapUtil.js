@@ -9,7 +9,7 @@ var photoMapUtil = require('lib/photoMapUtil');
 lab.experiment('Photo Map Util', function () {
 
   lab.test('add photo to empty map', function (done) {
-    photoMapUtil.addPhoto({}, {id: 'photo1', name: 'photoName1', id:'photo1'}, function(err, photoMap){
+    photoMapUtil.addPhoto({}, {id: 'photo1', name: 'photoName1', seen: false}, function(err, photoMap){
       Code.expect(err).to.be.null();
       Code.expect(Object.keys(photoMap).length).to.equal(1);
       Code.expect(Object.keys(photoMap).indexOf('photo1')).to.equal(0);
