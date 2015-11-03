@@ -1,3 +1,5 @@
+'use strict';
+
 var Path = require('path');
 var Joi = require('joi');
 
@@ -38,6 +40,6 @@ var register = function (plugin, options, next) {
 register.attributes = {
 	name : 'photoApi',
 	version : '1.0.0'
-}
+};
 
 module.exports = register;

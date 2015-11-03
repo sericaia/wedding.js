@@ -1,3 +1,5 @@
+'use strict';
+
 var Code = require('code');   // assertion library
 var Lab = require('lab');
 var lab = exports.lab = Lab.script();
