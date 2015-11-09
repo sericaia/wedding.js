@@ -19,11 +19,20 @@
   "homepage": "https://github.com/sericaia/wedding.js#readme",
   "dependencies": {
     "async": "^1.5.0",
+    "babel": "^6.0.15",
+    "dateformat": "^1.0.11",
+    "flux": "^2.1.1",
     "getconfig": "^2.1.0",
-    "hapi": "^11.0.1",
-    "inert": "^3.1.0",
+    "hapi": "^11.1.0",
+    "hapi-react-views": "^5.0.0",
+    "inert": "^3.2.0",
     "joi": "^6.9.1",
-    "lodash": "^3.10.1"
+    "lodash": "^3.10.1",
+    "object-assign": "^4.0.1",
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2",
+    "superagent": "^1.4.0",
+    "vision": "^4.0.1"
   },
   "devDependencies": {
     "code": "^1.5.0",
