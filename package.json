@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_PATH=. lab test",
-    "start": "NODE_PATH=. node index.js"
+    "start": "NODE_PATH=. node index.js",
+    "build": "NODE_PATH=. webpack -p --progress",
+    "dev": "NODE_PATH=. webpack --progress --color --watch & nodemon"
   },
   "repository": {
     "type": "git",
@@ -36,6 +38,9 @@
   },
   "devDependencies": {
     "code": "^1.5.0",
-    "lab": "^7.0.0"
+    "jsx-loader": "^0.13.2",
+    "lab": "^7.0.0",
+    "nodemon": "^1.8.1",
+    "webpack": "^1.12.3"
   }
 }

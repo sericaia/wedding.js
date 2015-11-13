@@ -2,7 +2,7 @@
 
 var Path = require('path');
 var Joi = require('joi');
-var through2 = require('through2');
+// var through2 = require('through2');
 var fs = require('fs');
 
 var register = function (plugin, options, next) {

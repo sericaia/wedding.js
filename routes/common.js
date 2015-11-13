@@ -5,22 +5,43 @@ var Joi = require('joi');
 
 var register = function (plugin, options, next) {
 
-plugin.route({
-  method: 'GET',
-  path: '/',
-  handler: function(request, reply) {
+  // Add the React-rendering view engine
+  plugin.views({
+    engines: {
+      jsx: require('hapi-react-views')
+    },
+    relativeTo: Path.join(__dirname, '..'), //search views in parent folder
+    path: 'views'
+  });
 
-    reply('Hello!');
-  }
-});
+  // Add a route to serve static assets (CSS, JS, IMG)
+  plugin.route({
+    method: 'GET',
+    path: '/{param*}',
+    handler: {
+      directory: {
+        path: 'assets',
+        index: ['index.html']
+      }
+    }
+  });
 
-next();
+  // Add main app route
+  plugin.route({
+    method: 'GET',
+    path: '/',
+    handler: {
+      view: 'Default'
+    }
+  });
+
+  next();
 };
 
 
 register.attributes = {
-name : 'commonApi',
-version : '1.0.0'
+  name : 'commonApi',
+  version : '1.0.0'
 };
 
 module.exports = register;
