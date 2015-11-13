@@ -4,7 +4,7 @@ var Hapi = require('hapi');
 var config = require('getconfig');
 var inert = require('inert');
 var vision = require('vision');
-var routes = require('routes');
+var routes = require('server/routes');
 var async = require('async');
 // Create a server with a host and port
 var server = new Hapi.Server();

@@ -4,8 +4,8 @@ var Code = require('code');   // assertion library
 var Lab = require('lab');
 var lab = exports.lab = Lab.script();
 var async = require('async');
-var PhotoSlideshow = require('lib/photoSlideshow');
-var photoMapUtil = require('lib/photoMapUtil');
+var PhotoSlideshow = require('server/lib/photoSlideshow');
+var photoMapUtil = require('server/lib/photoMapUtil');
 
 
 lab.experiment('Photo Slideshow', function () {

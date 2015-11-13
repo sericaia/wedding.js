@@ -1,7 +1,7 @@
 module.exports = {
-  entry: './assets/js/components/Index.jsx',
+  entry: './client/js/components/Index.jsx',
   output: {
-    path: __dirname + '/assets/js',
+    path: __dirname + '/client/js',
     filename: 'bundle.js'
   },
   module: {

@@ -2,7 +2,7 @@
 
 var async = require('async');
 var _ = require('lodash');
-var photoMapUtil = require('lib/photoMapUtil');
+var photoMapUtil = require('server/lib/photoMapUtil');
 
 var PhotoSlideshow = function(photoMap){
   var lastPhotoId = '';

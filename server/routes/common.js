@@ -20,7 +20,7 @@ var register = function (plugin, options, next) {
     path: '/{param*}',
     handler: {
       directory: {
-        path: 'assets',
+        path: 'client',
         index: ['index.html']
       }
     }
