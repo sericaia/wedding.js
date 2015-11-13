@@ -47,7 +47,17 @@ var register = function (plugin, options, next) {
         //   next();
         // }))
         // .pipe(fs.createWriteStream("vodoo"));
+        console.log('vodoooo...')
         request.payload.fileUpload.pipe(fs.createWriteStream('vodoo'));
+
+
+        // Alternative: use concat-stream ?
+        //reply();
+      },
+      validate: {
+        payload: {
+          fileUpload: Joi.string().required()
+        }
       }
     }
   });
