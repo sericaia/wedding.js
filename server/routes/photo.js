@@ -38,6 +38,7 @@ var register = function (plugin, options, next) {
         parse: true
       },
       handler: function(request, reply) {
+        // NOTE this solution could be changed with https://www.npmjs.com/package/pump
 
         // get folder name
         var dataFolder = './data';
@@ -45,15 +46,14 @@ var register = function (plugin, options, next) {
         var path = Path.join(dataFolder, fileName);
 
         var write = function(buffer, encoding, next) {
-          this.push(buffer);
-          next();
+          next(null, buffer);
         };
 
         var end = function(next) {
           reply();
           next();
         };
-        
+
         // pipe data into data folder
         request.payload.fileUpload
         .pipe(through2(write, end))
