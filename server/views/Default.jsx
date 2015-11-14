@@ -13,7 +13,7 @@ var Default = React.createClass({
           <title>Wedding.js</title>
           <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"></link>
         </head>
-        <body style={{color: '#acacac'}}>
+        <body>
           <div id="app"></div>
           <script src="js/bundle.js"></script>
         </body>

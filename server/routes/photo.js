@@ -2,7 +2,7 @@
 
 var Path = require('path');
 var Joi = require('joi');
-// var through2 = require('through2');
+var through2 = require('through2');
 var fs = require('fs');
 
 var register = function (plugin, options, next) {
@@ -32,31 +32,36 @@ var register = function (plugin, options, next) {
     path: '/photo',
     config: {
       payload: {
-        output: 'file',
+        output: 'stream',
         maxBytes: 209715200,
         //allow: 'multipart/form-data',
         parse: true
       },
       handler: function(request, reply) {
 
-        // TODO See example http://bl.ocks.org/joyrexus/0c6bd5135d7edeba7b87
+        // get folder name
+        var dataFolder = './data';
+        var fileName = request.payload.fileUpload.hapi.filename;
+        var path = Path.join(dataFolder, fileName);
 
-        // request
-        // .pipe(through2(function(buffer, encoding, next) {
-        //   this.push(buffer.toString().toUpperCase());
-        //   next();
-        // }))
-        // .pipe(fs.createWriteStream("vodoo"));
-        console.log('vodoooo...')
-        request.payload.fileUpload.pipe(fs.createWriteStream('vodoo'));
+        var write = function(buffer, encoding, next) {
+          this.push(buffer);
+          next();
+        };
 
-
-        // Alternative: use concat-stream ?
-        //reply();
+        var end = function(next) {
+          reply();
+          next();
+        };
+        
+        // pipe data into data folder
+        request.payload.fileUpload
+        .pipe(through2(write, end))
+        .pipe(fs.createWriteStream(path));
       },
       validate: {
         payload: {
-          fileUpload: Joi.string().required()
+          fileUpload: Joi.required()
         }
       }
     }
