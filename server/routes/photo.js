@@ -4,19 +4,51 @@ var Path = require('path');
 var Joi = require('joi');
 var through2 = require('through2');
 var fs = require('fs');
+var async = require('async');
 
 var register = function (plugin, options, next) {
+  plugin.route({
+    method: 'GET',
+    path: '/photo',
+    handler: function(request, reply) {
+      var path = 'data';
+      fs.readdir(path, function(err, files){
+        if (err || !files) {
+          return reply().code(500); //TODO change to apropriate one
+        }
+
+        async.reduce(files, [], function(memo, filename, callback) {
+          var isHidden = /^\./.test(filename);
+          if (!isHidden) {
+            memo.push(filename);
+          }
+          callback(null, memo);
+        }, function(err, memo) {
+          if (err || !memo.length) {
+            return reply().code(500); //TODO change to apropriate one
+          }
+
+          return reply(memo);
+        });
+      });
+    },
+    config: {
+      description: 'Return all photos',
+      tags: ['get', 'photos']
+    }
+  });
+
   plugin.route({
     method: 'GET',
     path: '/photo/{photoPath*}',
     handler: {
       directory: {
-        path: 'public',
+        path: 'data',
         listing: false
       }
     },
     config: {
-      description: 'Return photos',
+      description: 'Return photo',
       notes: 'The photoPath is mandatory',
       tags: ['get', 'photos'],
       validate: {
@@ -31,6 +63,8 @@ var register = function (plugin, options, next) {
     method: 'POST',
     path: '/photo',
     config: {
+      description: 'Add photo',
+      tags: ['post', 'photo'],
       payload: {
         output: 'stream',
         maxBytes: 209715200,
