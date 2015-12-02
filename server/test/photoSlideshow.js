@@ -1,52 +1,66 @@
 'use strict';
 
-var Code = require('code');   // assertion library
-var Lab = require('lab');
-var lab = exports.lab = Lab.script();
-var async = require('async');
-var PhotoSlideshow = require('server/lib/photoSlideshow');
-var photoMapUtil = require('server/lib/photoMapUtil');
+const Code = require('code');   // assertion library
+const Lab = require('lab');
+const lab = exports.lab = Lab.script();
+const async = require('async');
+const PhotoSlideshow = require('server/lib/photoSlideshow');
+const PhotoMapUtil = require('server/lib/photoMapUtil');
+const photoMapUtil = new PhotoMapUtil();
 
+lab.experiment('Photo Slideshow', () => {
 
-lab.experiment('Photo Slideshow', function () {
+    lab.test('slideshow with one photo', (done) => {
 
-  lab.test('slideshow with one photo', function (done) {
-    photoMapUtil.addPhoto({}, {id: 'photo1', name: 'photoName1', seen: true}, function(err, photoMap){
-      var ps = PhotoSlideshow(photoMap);
-      ps.nextPhoto(function(err, photo){
-        Code.expect(err).to.be.null();
-        Code.expect(photo.name).to.equal('photoName1');
-        Code.expect(photo.seen).to.equal(true);
-        Code.expect(photo.id).to.equal('photo1');
-        done();
-      });
-    });
-  });
+        photoMapUtil.addPhoto({}, { id: 'photo1', name: 'photoName1', seen: true }, (err, photoMap) => {
 
-  lab.test('slideshow with two photos', function (done) {
-    photoMapUtil.addPhoto({}, {id: 'photo1', name: 'photoName1',seen: false}, function(err, photoMap) {
-      photoMapUtil.addPhoto(photoMap, {id: 'photo2', name: 'photoName2', seen: false}, function(err, nPhotoMap) {
-
-        var ps = PhotoSlideshow(nPhotoMap);
-        var i = 0;
-        var lastPhoto = {};
-        async.whilst(
-          function(){ return i < 5; },
-          function(cbAsync){
-            ps.nextPhoto(function(err, photo){
-              Code.expect(err).to.be.null();
-              Code.expect(photo).not.to.equal(lastPhoto);
-              lastPhoto = photo;
-              ++i;
-              cbAsync();
-            });
-          },
-          function(err){
             Code.expect(err).to.be.null();
-            done();
-        });
-      });
-    });
-  });
+            const ps = new PhotoSlideshow(photoMap);
+            ps.nextPhoto((err, photo) => {
 
+                Code.expect(err).to.be.null();
+                Code.expect(photo.name).to.equal('photoName1');
+                Code.expect(photo.seen).to.equal(true);
+                Code.expect(photo.id).to.equal('photo1');
+                done();
+            });
+        });
+    });
+
+    lab.test('slideshow with two photos', (done) => {
+
+        photoMapUtil.addPhoto({}, { id: 'photo1', name: 'photoName1',seen: false }, (err, photoMap) => {
+
+            Code.expect(err).to.be.null();
+            photoMapUtil.addPhoto(photoMap, { id: 'photo2', name: 'photoName2', seen: false }, (err, nPhotoMap) => {
+
+                Code.expect(err).to.be.null();
+                const ps = new PhotoSlideshow(nPhotoMap);
+                let i = 0;
+                let lastPhoto = {};
+                async.whilst(
+                    () => {
+
+                        return i < 5;
+                    },
+                    (cbAsync) => {
+
+                        ps.nextPhoto((err, photo) => {
+
+                            Code.expect(err).to.be.null();
+                            Code.expect(photo).not.to.equal(lastPhoto);
+                            lastPhoto = photo;
+                            ++i;
+                            cbAsync();
+                        });
+                    },
+                    (err) => {
+
+                        Code.expect(err).to.be.null();
+                        done();
+                    }
+                );
+            });
+        });
+    });
 });

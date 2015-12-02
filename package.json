@@ -9,6 +9,9 @@
     "build": "NODE_PATH=. webpack -p --progress",
     "dev": "NODE_PATH=. webpack --progress --color --watch & nodemon"
   },
+  "pre-commit": [
+    "test"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sericaia/wedding.js.git"
@@ -37,9 +40,13 @@
   },
   "devDependencies": {
     "code": "^1.5.0",
+    "eslint": "^1.10.3",
+    "eslint-config-hapi": "^8.0.0",
+    "eslint-plugin-hapi": "^4.0.0",
     "jsx-loader": "^0.13.2",
     "lab": "^7.0.0",
     "nodemon": "^1.8.1",
+    "pre-commit": "^1.1.2",
     "webpack": "^1.12.3"
   }
 }
