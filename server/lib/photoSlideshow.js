@@ -1,7 +1,7 @@
 'use strict';
 
 const async = require('async');
-const PhotoMapUtil = require('server/lib/photoMapUtil')();
+const PhotoMapUtil = require('server/lib/photoMapUtil');
 const photoMapUtil = new PhotoMapUtil();
 
 const PhotoSlideshow = function (photoMap) {
