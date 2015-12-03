@@ -13,4 +13,4 @@ methods.getApp = {
     view: 'Default'
 };
 
-module.exports = handlers;
+module.exports = methods;

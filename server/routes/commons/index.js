@@ -11,7 +11,7 @@ const register = function (plugin, options, next) {
         engines: {
             jsx: require('hapi-react-views')
         },
-        relativeTo: Path.join(__dirname, '..'), //search views in parent folder
+        relativeTo: Path.join(__dirname, '../..'), //search views in parent folder
         path: 'views'
     });
 
