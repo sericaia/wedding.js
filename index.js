@@ -7,7 +7,6 @@ const config = require('getconfig');
 const inert = require('inert');
 const vision = require('vision');
 const routes = require('server/routes');
-const async = require('async');
 
 // Create a server with a host and port
 const server = new Hapi.Server();
@@ -17,20 +16,8 @@ server.connection({
     port: process.env.PORT || config.port
 });
 
-async.parallel([
-    function (cb) {
-
-        server.register(inert, cb);
-    },
-    function (cb) {
-
-        server.register(vision, cb);
-    },
-    function (cb) {
-
-        server.register(routes, cb);
-    }
-], (err) => {
+const pulgins = [inert, vision].concat(routes);
+server.register(pulgins, (err) => {
 
     if (err) {
         throw err;

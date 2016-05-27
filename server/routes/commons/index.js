@@ -4,10 +4,10 @@ const Path = require('path');
 
 const handlers = require('server/routes/commons/handlers');
 
-const register = function (plugin, options, next) {
+const register = function (server, options, next) {
 
     // Add the React-rendering view engine
-    plugin.views({
+    server.views({
         engines: {
             jsx: require('hapi-react-views')
         },
@@ -16,14 +16,14 @@ const register = function (plugin, options, next) {
     });
 
     // Add a route to serve static assets (CSS, JS, IMG)
-    plugin.route({
+    server.route({
         method: 'GET',
         path: '/{param*}',
         config: handlers.getStaticAssets
     });
 
     // Add main app route
-    plugin.route({
+    server.route({
         method: 'GET',
         path: '/',
         config: handlers.getApp

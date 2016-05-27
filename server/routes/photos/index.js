@@ -2,21 +2,21 @@
 
 const handlers = require('server/routes/photos/handlers');
 
-const register = function (plugin, options, next) {
+const register = function (server, options, next) {
 
-    plugin.route({
+    server.route({
         method: 'GET',
         path: '/photo',
         config: handlers.getPhotos
     });
 
-    plugin.route({
+    server.route({
         method: 'GET',
         path: '/photo/{photoPath*}',
         config: handlers.getPhotoByID
     });
 
-    plugin.route({
+    server.route({
         method: 'POST',
         path: '/photo',
         config: handlers.postPhoto

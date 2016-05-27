@@ -25,7 +25,7 @@ methods.getPhotos = function (request, reply) {
             return callback(null, memo);
         }, (err, memo) => {
 
-            if (err || !memo.length) {
+            if (err) {
                 return reply().code(500); //TODO change to apropriate one
             }
 
