@@ -3,28 +3,17 @@ import PictureList from './PictureList.jsx';
 
 export default class WeddingApp extends React.Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {};
   }
 
-  render() {
+  render () {
     return (
       <div>
-        <h4>WeddingJS</h4>
+        <h4>Ana e Luís - 27 de Julho de 2016</h4>
         <PictureList />
       </div>
     );
   }
 }
-
-WeddingApp.defaultProps = {
-  getAllPhotos: {
-    url: '/photo',
-    method: 'GET'
-  },
-  getPhoto: {
-    url: '/photo/',
-    method: 'GET'
-  }
-};

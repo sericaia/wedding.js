@@ -1,48 +1,89 @@
 import React from 'react';
+
+const Carousel = require('react-slick');
+
 import PictureItem from './PictureItem.jsx';
 import PictureForm from './PictureForm.jsx';
 
+import Nes from 'nes';
+
 export default class PictureList extends React.Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       data: []
     };
+    this.client = new Nes.Client('ws://localhost:3000');
   }
 
-  componentDidMount() {
-    $.ajax({
+  componentDidMount () {
+    this.serverRequest = $.ajax({
       url: this.props.getAllPhotos.url,
       method: this.props.getAllPhotos.method,
-      success: function(data) {
+      success: (data) => {
         this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
+      },
+      error: (xhr, status, err) => {
         console.error(this.props.getAllPhotos, status, err.toString());
-      }.bind(this)
+      }
+    });
+    this.client.connect((err) => {
+      if (err) {
+        console.log('COULD NOT CONNECT', err);
+      }
+      this.client.subscribe('/photos', this.handleData.bind(this), (err) => {
+        if (err) {
+          console.log('COULD NOT SUBSCRIBE', err);
+        }
+      });
     });
   }
 
-  render() {
+  handleData (data) {
+    const newData = this.state.data.concat([data]);
+    this.setState({
+      data: newData
+    });
+  }
+
+  componentWillUnmount () {
+    this.serverRequest.abort();
+  }
+
+  render () {
+    const settings = {
+      dots: true,
+      slidesToShow: 1
+      // infinite: true,
+      // speed: 500,
+      // slidesToShow: 1,
+      // autoplay: true,
+      // autoplaySpeed: 3000,
+      // slidesToScroll: 1,
+      // lazyLoad: false,
+      // arrows: true
+    };
     return (
       <div>
-        <PictureForm />
-
         <div>
-          <h4>File List</h4>
-          { this.state.data.map(function(item) {
-            return (<PictureItem item={item} />);
-          }, this) }
+          <Carousel {...settings}>
+            {this.state.data.map(function (item) {
+              return (<PictureItem key={item} item={item} />);
+            }, this)}
+          </Carousel>
         </div>
+        <PictureForm />
       </div>
     );
   }
 }
 
+PictureList.mixins = [Carousel.ControllerMixin];
+
 PictureList.defaultProps = {
   getAllPhotos: {
-    url: '/photo',
+    url: '/photos',
     method: 'GET'
   }
 };

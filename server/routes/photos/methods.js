@@ -1,6 +1,6 @@
 'use strict';
 
-const Path = require('path');
+const path = require('path');
 const through2 = require('through2');
 const fs = require('fs');
 const async = require('async');
@@ -8,63 +8,53 @@ const async = require('async');
 const methods = {};
 
 methods.getPhotos = function (request, reply) {
+  fs.readdir('data', (err, files) => {
+    if (err || !files) {
+      return reply().code(500); // TODO change to apropriate one
+    }
 
-    const path = 'data';
-    fs.readdir(path, (err, files) => {
-
-        if (err || !files) {
-            return reply().code(500); //TODO change to apropriate one
-        }
-
-        async.reduce(files, [], (memo, filename, callback) => {
-
-            const isHidden = /^\./.test(filename);
-            if (!isHidden) {
-                memo.push(filename);
-            }
-            return callback(null, memo);
-        }, (err, memo) => {
-
-            if (err) {
-                return reply().code(500); //TODO change to apropriate one
-            }
-
-            return reply(memo);
-        });
+    async.reduce(files, [], (memo, filename, callback) => {
+      const isHidden = /^\./.test(filename);
+      if (!isHidden) {
+        memo.push(filename);
+      }
+      return callback(null, memo);
+    }, (err, memo) => {
+      if (err) {
+        return reply().code(500); // TODO change to apropriate one
+      }
+      return reply(memo);
     });
+  });
 };
 
 methods.getPhotoByID = {
-    directory: {
-        path: 'data',
-        listing: false
-    }
+  directory: {
+    path: 'data',
+    listing: false
+  }
 };
 
-
 methods.postPhoto = function (request, reply) {
-  // NOTE this solution could be changed with https://www.npmjs.com/package/pump
+  const dataFolder = './data';
+  const fileName = request.payload.fileUpload.hapi.filename;
+  const path2 = path.join(dataFolder, fileName);
 
-  // get folder name
-    const dataFolder = './data';
-    const fileName = request.payload.fileUpload.hapi.filename;
-    const path = Path.join(dataFolder, fileName);
+  function write (buffer, encoding, next) {
+    return next(null, buffer);
+  }
 
-    const write = function (buffer, encoding, next) {
+  function end (next) {
+    reply();
+    next();
+  }
 
-        return next(null, buffer);
-    };
+  // pipe data into data folder
+  request.payload.fileUpload
+    .pipe(through2(write, end))
+    .pipe(fs.createWriteStream(path2));
 
-    const end = function (next) {
-
-        reply();
-        next();
-    };
-
-    // pipe data into data folder
-    request.payload.fileUpload
-        .pipe(through2(write, end))
-        .pipe(fs.createWriteStream(path));
+  request.server.publish('/photos', fileName);
 };
 
 module.exports = methods;

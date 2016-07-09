@@ -3,14 +3,14 @@
 const methods = {};
 
 methods.getStaticAssets = {
-    directory: {
-        path: 'client',
-        index: ['index.html']
-    }
+  directory: {
+    path: 'client',
+    index: ['index.html']
+  }
 };
 
 methods.getApp = {
-    view: 'Default'
+  view: 'Default'
 };
 
 module.exports = methods;

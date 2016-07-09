@@ -1,29 +1,57 @@
 import React from 'react';
 
-// NOTE:: change this into stateless
-// https://facebook.github.io/react/blog/2015/10/07/react-v0.14.html#stateless-functional-components
-//
-// var PictureForm = () => (
-//   <form action="/photo" method="POST" encType="multipart/form-data">
-//     <input type="file" name="fileUpload" id="fileUpload" className="form-control" />
-//     <button className="btn">Submit</button>
-//   </form>
-// );
-
 export default class PictureForm extends React.Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
     };
   }
 
-  render() {
+  handleChange (e) {
+    let data = new FormData();
+    data.append('fileUpload', e.target.files[0]);
+
+    this.serverRequest = $.ajax({
+      url: this.props.postPhoto.url,
+      method: this.props.postPhoto.method,
+      processData: false,
+      contentType: false,
+      data: data,
+      success: function (data) {
+      },
+      error: function (xhr, status, err) {
+        console.log('NOT SUBMITTED', status, err);
+      }
+    });
+  }
+
+  componentWillUnmount () {
+    this.serverRequest.abort();
+  }
+
+  render () {
     return (
-      <form action="/photo" method="POST" encType="multipart/form-data">
-        <input type="file" name="fileUpload" id="fileUpload" className="form-control" />
-        <button className="btn">Submit</button>
-      </form>
+      <div>
+        <label htmlFor='fileUpload'>
+          <span className='glyphicon glyphicon-camera'></span>
+        </label>
+        <input
+          type='file'
+          name='fileUpload'
+          id='fileUpload'
+          className='form-control'
+          accept='image/*'
+          style={{display: 'none'}}
+          onChange={this.handleChange.bind(this)} />
+      </div>
     );
   }
 }
+
+PictureForm.defaultProps = {
+  postPhoto: {
+    url: '/photos',
+    method: 'POST'
+  }
+};

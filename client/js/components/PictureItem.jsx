@@ -2,19 +2,14 @@ import React from 'react';
 
 export default class PictureItem extends React.Component {
 
-  constructor(props) {
-    super(props);
+  getPhotoSrc (photoUrl) {
+    return this.props.getPhotos.url + photoUrl;
   }
 
-  getPhotoSrc(photoUrl) {
-    return this.props.getPhoto.url + photoUrl;
-  }
-
-  render() {
+  render () {
     return (
-      <div key={this.props.item}>
-        <img src={this.getPhotoSrc(this.props.item)} height="150"/>
-        <div>{this.props.item}</div>
+      <div>
+        <img src={this.getPhotoSrc(this.props.item)} height={this.props.height} />
       </div>
     );
   }
@@ -25,8 +20,9 @@ PictureItem.propTypes = {
 };
 
 PictureItem.defaultProps = {
-  getPhoto: {
-    url: '/photo/',
+  getPhotos: {
+    url: '/photos/',
     method: 'GET'
-  }
+  },
+  height: '150'
 };
