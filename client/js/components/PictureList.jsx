@@ -14,7 +14,7 @@ export default class PictureList extends React.Component {
     this.state = {
       data: []
     };
-    this.client = new Nes.Client('ws://localhost:3000');
+    this.client = new Nes.Client('ws://' + process.env.WEDDING_JS_HOST + ':' + process.env.WEDDING_JS_PORT);
   }
 
   componentDidMount () {
@@ -54,32 +54,31 @@ export default class PictureList extends React.Component {
   render () {
     const settings = {
       dots: true,
-      slidesToShow: 1
+      slidesToShow: 1,
+      arrows: true,
+      lazyLoad: true,
       // infinite: true,
       // speed: 500,
       // slidesToShow: 1,
       // autoplay: true,
       // autoplaySpeed: 3000,
       // slidesToScroll: 1,
-      // lazyLoad: false,
-      // arrows: true
     };
+    console.log('SSSS', this.state.data);
     return (
       <div>
-        <div>
-          <Carousel {...settings}>
-            {this.state.data.map(function (item) {
+          <Carousel>
+            {this.state.data.map((item) => {
               return (<PictureItem key={item} item={item} />);
-            }, this)}
+            })}
           </Carousel>
-        </div>
         <PictureForm />
       </div>
     );
   }
 }
 
-PictureList.mixins = [Carousel.ControllerMixin];
+//PictureList.mixins = [Carousel.ControllerMixin];
 
 PictureList.defaultProps = {
   getAllPhotos: {

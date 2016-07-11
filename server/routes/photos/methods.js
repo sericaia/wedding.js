@@ -3,7 +3,6 @@
 const path = require('path');
 const through2 = require('through2');
 const fs = require('fs');
-const async = require('async');
 
 const methods = {};
 
@@ -12,19 +11,7 @@ methods.getPhotos = function (request, reply) {
     if (err || !files) {
       return reply().code(500); // TODO change to apropriate one
     }
-
-    async.reduce(files, [], (memo, filename, callback) => {
-      const isHidden = /^\./.test(filename);
-      if (!isHidden) {
-        memo.push(filename);
-      }
-      return callback(null, memo);
-    }, (err, memo) => {
-      if (err) {
-        return reply().code(500); // TODO change to apropriate one
-      }
-      return reply(memo);
-    });
+    return reply(files);
   });
 };
 

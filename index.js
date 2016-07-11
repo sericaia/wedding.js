@@ -1,7 +1,7 @@
 'use strict';
 
 require('babel-register')({
-  presets: ['es2015', 'react']
+  presets: ['react']
 });
 
 const Hapi = require('hapi');
