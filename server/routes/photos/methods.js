@@ -11,7 +11,8 @@ methods.getPhotos = function (request, reply) {
     if (err || !files) {
       return reply().code(500); // TODO change to apropriate one
     }
-    return reply(files);
+    // return files but remove hidden files
+    return reply(files.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item)));
   });
 };
 

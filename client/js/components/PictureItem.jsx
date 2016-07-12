@@ -9,9 +9,7 @@ export default class PictureItem extends React.Component {
   render () {
     console.log('I GOT', this.getPhotoSrc(this.props.item));
     return (
-      <div>
-        <img src={this.getPhotoSrc(this.props.item)} height={this.props.height} />
-      </div>
+      <img src={this.getPhotoSrc(this.props.item)} height={this.props.height} />
     );
   }
 }

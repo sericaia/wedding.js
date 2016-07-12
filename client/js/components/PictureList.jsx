@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Carousel = require('react-slick');
+var Slider = require('react-slick');
 
 import PictureItem from './PictureItem.jsx';
 import PictureForm from './PictureForm.jsx';
@@ -62,25 +62,32 @@ export default class PictureList extends React.Component {
       // infinite: true,
       // speed: 500,
       // slidesToShow: 1,
-      // autoplay: true,
-      // autoplaySpeed: 3000,
+      autoplay: true,
+      autoplaySpeed: 3000,
       // slidesToScroll: 1,
     };
-    console.log('SSSS', this.state.data);
-    return (
-      <div>
-          <Carousel>
+
+    if (!this.state.data.length) {
+      return (<p>Loading data.. </p>);
+    }
+
+    else {
+      return (
+        <div>
+          <Slider {...settings}>
             {this.state.data.map((item) => {
-              return (<PictureItem key={item} item={item} />);
+              return (
+                <div key={item}>
+                  <PictureItem item={item} />
+                </div>);
             })}
-          </Carousel>
-        <PictureForm />
-      </div>
-    );
+          </Slider>
+          <PictureForm />
+        </div>
+      );
+    }
   }
 }
-
-//PictureList.mixins = [Carousel.ControllerMixin];
 
 PictureList.defaultProps = {
   getAllPhotos: {
