@@ -12,22 +12,25 @@ export default class PictureForm extends React.Component {
     let data = new FormData();
     data.append('fileUpload', e.target.files[0]);
 
-    this.serverRequest = $.ajax({
-      url: this.props.postPhoto.url,
+    fetch(this.props.postPhoto.url, {
       method: this.props.postPhoto.method,
       processData: false,
       contentType: false,
-      data: data,
-      success: function (data) {
-      },
-      error: function (xhr, status, err) {
-        console.log('NOT SUBMITTED', status, err);
+      body: data
+    }).then(function(response) {
+      if(response.ok) {
+        console.log('IMG SUBMITTED');
+      } else {
+        console.log('RESPONSE NOT OK');
       }
+    }).catch(function(error) {
+      console.log('NOT SUBMITTED', error);
     });
   }
 
   componentWillUnmount () {
-    this.serverRequest.abort();
+    // Its not yet possible to abort a fetch request
+    // see https://github.com/whatwg/fetch/issues/27
   }
 
   render () {

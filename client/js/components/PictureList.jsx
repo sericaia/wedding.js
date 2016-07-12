@@ -18,16 +18,17 @@ export default class PictureList extends React.Component {
   }
 
   componentDidMount () {
-    this.serverRequest = $.ajax({
-      url: this.props.getAllPhotos.url,
-      method: this.props.getAllPhotos.method,
-      success: (data) => {
-        this.setState({data: data});
-      },
-      error: (xhr, status, err) => {
-        console.error(this.props.getAllPhotos, status, err.toString());
-      }
-    });
+
+    fetch(this.props.getAllPhotos.url, {
+      method: this.props.getAllPhotos.method
+    }).then(function(response) {
+      return response.json();
+    }).then(function(data) {
+      this.setState({data: data});
+    }.bind(this)).catch(function(error) {
+      console.error(this.props.getAllPhotos, error.toString());
+    }.bind(this));
+
     this.client.connect((err) => {
       if (err) {
         console.log('COULD NOT CONNECT', err);
@@ -48,7 +49,8 @@ export default class PictureList extends React.Component {
   }
 
   componentWillUnmount () {
-    this.serverRequest.abort();
+    // Its not yet possible to abort a fetch request
+    // see https://github.com/whatwg/fetch/issues/27
   }
 
   render () {
