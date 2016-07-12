@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "share wedding photos like a pro!",
   "main": "index.js",
+  "engines": {
+    "node" : ">=4.4.7"
+  },
   "scripts": {
     "test": "NODE_PATH=. lab server/test",
     "start": "NODE_PATH=. node index.js",
