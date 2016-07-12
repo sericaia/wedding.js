@@ -4,7 +4,7 @@
   "description": "share wedding photos like a pro!",
   "main": "index.js",
   "engines": {
-    "node" : ">=4.4.7"
+    "node": ">=4.4.7"
   },
   "scripts": {
     "test": "NODE_PATH=. lab server/test",
@@ -34,6 +34,7 @@
     "inert": "^4.0.1",
     "joi": "^8.4.2",
     "nes": "^6.2.1",
+    "object-assign": "^4.1.0",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-slick": "^0.12.2",
