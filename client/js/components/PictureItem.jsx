@@ -9,7 +9,9 @@ export default class PictureItem extends React.Component {
   render () {
     console.log('I GOT', this.getPhotoSrc(this.props.item));
     return (
-      <img src={this.getPhotoSrc(this.props.item)} height={this.props.height} />
+      <img
+        style={{width: '100%'}}
+        src={this.getPhotoSrc(this.props.item)}/>
     );
   }
 }
@@ -22,6 +24,5 @@ PictureItem.defaultProps = {
   getPhotos: {
     url: '/photos/',
     method: 'GET'
-  },
-  height: '150'
+  }
 };

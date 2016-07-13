@@ -35,9 +35,12 @@ export default class PictureForm extends React.Component {
 
   render () {
     return (
-      <div>
-        <label htmlFor='fileUpload'>
-          <span className='glyphicon glyphicon-camera'></span>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center'
+      }}>
+        <label type="button" className="btn btn-default" htmlFor='fileUpload'>
+          Upload Picture <span className='glyphicon glyphicon-camera'></span>
         </label>
         <input
           type='file'

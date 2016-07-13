@@ -1,4 +1,5 @@
 import React from 'react';
+import PictureForm from './PictureForm.jsx';
 import PictureList from './PictureList.jsx';
 
 export default class WeddingApp extends React.Component {
@@ -11,8 +12,25 @@ export default class WeddingApp extends React.Component {
   render () {
     return (
       <div>
-        <h4>Ana e Luís - 27 de Julho de 2016</h4>
-        <PictureList />
+        <div style={{
+          backgroundColor: '#72a8ab',
+          display: '-ms-flex',
+          display: '-webkit-flex',
+          display: 'flex',
+          padding: '30px 30px 0px 0px'
+        }}>
+          <div style={{
+            width: '30%'
+          }}>
+            <img src="/assets/logotipo.png" style={{width: '100%'}}/>
+            <PictureForm />
+          </div>
+          <div style={{
+            width: '70%'
+          }}>
+            <PictureList />
+          </div>
+        </div>
       </div>
     );
   }

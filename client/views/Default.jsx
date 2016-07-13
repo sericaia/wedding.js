@@ -15,7 +15,7 @@ const Default = React.createClass({
           <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' />
           <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.15/slick.css' />
         </head>
-        <body>
+        <body style={{backgroundColor: '#72a8ab'}}>
           <div id='app'></div>
           <script src='js/bundle.js'></script>
         </body>

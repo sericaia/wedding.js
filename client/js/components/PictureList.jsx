@@ -3,7 +3,6 @@ import React from 'react';
 var Slider = require('react-slick');
 
 import PictureItem from './PictureItem.jsx';
-import PictureForm from './PictureForm.jsx';
 
 import Nes from 'nes';
 
@@ -55,9 +54,9 @@ export default class PictureList extends React.Component {
 
   render () {
     const settings = {
-      dots: true,
+      dots: false,
+      arrows: false,
       slidesToShow: 1,
-      arrows: true,
       lazyLoad: true,
       // infinite: true,
       // speed: 500,
@@ -77,12 +76,11 @@ export default class PictureList extends React.Component {
           <Slider {...settings}>
             {this.state.data.map((item) => {
               return (
-                <div key={item}>
+                <div key={item} style={{border: '#e90677 solid 2px'}}>
                   <PictureItem item={item} />
                 </div>);
             })}
           </Slider>
-          <PictureForm />
         </div>
       );
     }
