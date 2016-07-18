@@ -1,3 +1,4 @@
+/* global FormData, fetch */
 import React from 'react';
 
 export default class PictureForm extends React.Component {
@@ -17,13 +18,13 @@ export default class PictureForm extends React.Component {
       processData: false,
       contentType: false,
       body: data
-    }).then(function(response) {
-      if(response.ok) {
+    }).then((response) => {
+      if (response.ok) {
         console.log('IMG SUBMITTED');
       } else {
         console.log('RESPONSE NOT OK');
       }
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log('NOT SUBMITTED', error);
     });
   }
@@ -35,12 +36,9 @@ export default class PictureForm extends React.Component {
 
   render () {
     return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center'
-      }}>
-        <label type="button" className="btn btn-default" htmlFor='fileUpload'>
-          Upload Picture <span className='glyphicon glyphicon-camera'></span>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <label type='button' className='btn btn-default' htmlFor='fileUpload' style={{backgroundColor: '#8EB9BC', border: '#4C7D80 solid 1px'}}>
+          <span className='glyphicon glyphicon-camera' style={{fontSize: '50px'}}></span>
         </label>
         <input
           type='file'

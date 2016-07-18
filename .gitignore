@@ -2,3 +2,4 @@ node_modules
 client/js/bundle.js
 data
 npm-debug.log
+*env

@@ -2,16 +2,36 @@ import React from 'react';
 
 export default class PictureItem extends React.Component {
 
+  constructor (props) {
+    super(props);
+    this.state = {
+      style: null
+    };
+  }
+
   getPhotoSrc (photoUrl) {
     return this.props.getPhotos.url + photoUrl;
   }
 
+  onLoad (img) {
+    const width = document.getElementById('picItem').clientWidth;
+    return this.setState({
+      style: {
+        border: '#E90677 solid 2px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        maxWidth: width,
+        maxHeight: window.innerHeight - 50
+      }
+    });
+  }
+
   render () {
-    console.log('I GOT', this.getPhotoSrc(this.props.item));
     return (
       <img
-        style={{width: '100%'}}
-        src={this.getPhotoSrc(this.props.item)}/>
+        style={this.state.style}
+        src={this.getPhotoSrc(this.props.item)}
+        onLoad={this.onLoad.bind(this)} />
     );
   }
 }

@@ -1,6 +1,7 @@
+/* global fetch */
 import React from 'react';
 
-var Slider = require('react-slick');
+const Slider = require('react-slick');
 
 import PictureItem from './PictureItem.jsx';
 
@@ -17,16 +18,15 @@ export default class PictureList extends React.Component {
   }
 
   componentDidMount () {
-
     fetch(this.props.getAllPhotos.url, {
       method: this.props.getAllPhotos.method
-    }).then(function(response) {
+    }).then((response) => {
       return response.json();
-    }).then(function(data) {
+    }).then((data) => {
       this.setState({data: data});
-    }.bind(this)).catch(function(error) {
+    }).catch((error) => {
       console.error(this.props.getAllPhotos, error.toString());
-    }.bind(this));
+    });
 
     this.client.connect((err) => {
       if (err) {
@@ -58,25 +58,20 @@ export default class PictureList extends React.Component {
       arrows: false,
       slidesToShow: 1,
       lazyLoad: true,
-      // infinite: true,
-      // speed: 500,
-      // slidesToShow: 1,
+      infinite: true,
       autoplay: true,
-      autoplaySpeed: 3000,
-      // slidesToScroll: 1,
+      autoplaySpeed: 3000
     };
 
     if (!this.state.data.length) {
       return (<p>Loading data.. </p>);
-    }
-
-    else {
+    } else {
       return (
         <div>
           <Slider {...settings}>
             {this.state.data.map((item) => {
               return (
-                <div key={item} style={{border: '#e90677 solid 2px'}}>
+                <div id='picItem' ref={item} key={item} style={{backgroundColor: '#72a8ab'}}>
                   <PictureItem item={item} />
                 </div>);
             })}

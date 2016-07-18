@@ -12,7 +12,7 @@ methods.getPhotos = function (request, reply) {
       return reply().code(500); // TODO change to apropriate one
     }
     // return files but remove hidden files
-    return reply(files.filter(item => !(/(^|\/)\.[^\/\.]/g).test(item)));
+    return reply(files.filter((item) => !(/(^|\/)\.[^\/\.]/g).test(item)));
   });
 };
 

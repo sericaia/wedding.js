@@ -9,12 +9,12 @@ export default class WeddingApp extends React.Component {
     this.state = {};
   }
 
-  isSmartPhone() {
+  isSmartPhone () {
     var width = window.fakeInnerWidth || window.innerWidth;
     return width <= 568;
   }
 
-  getPictureStyle() {
+  getPictureStyle () {
     if (this.isSmartPhone()) {
       return {
         width: '100%'
@@ -22,16 +22,16 @@ export default class WeddingApp extends React.Component {
     } else {
       return {
         width: '70%'
-      }
+      };
     }
   }
 
-  getContentWrapperStyle() {
+  getContentWrapperStyle () {
     var contentWrapper = {
       backgroundColor: '#72a8ab',
-      display: '-ms-flex',
+      // display: '-ms-flex',
       display: '-webkit-flex',
-      display: 'flex',
+      // display: 'flex',
       padding: '30px 30px 0px 0px'
     };
 
@@ -47,10 +47,8 @@ export default class WeddingApp extends React.Component {
     return (
       <div>
         <div style={this.getContentWrapperStyle()}>
-          <div style={
-            this.isSmartPhone() ? {width: '100%'} : {width: '30%'}
-          }>
-            <img src="/assets/logotipo.png" style={{width: '100%'}}/>
+          <div style={this.isSmartPhone() ? {width: '100%'} : {width: '30%'}}>
+            <img src='/assets/logotipo.png' style={{width: '100%'}} />
             <PictureForm />
           </div>
           <div style={this.getPictureStyle()}>
