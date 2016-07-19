@@ -28,6 +28,11 @@ methods.postPhoto = function (request, reply) {
   const fileName = request.payload.fileUpload.hapi.filename;
   const path2 = path.join(dataFolder, fileName);
 
+  // create output folder if it does not exist
+  if (!fs.existsSync(dataFolder)) {
+    fs.mkdirSync(dataFolder);
+  }
+
   function write (buffer, encoding, next) {
     return next(null, buffer);
   }

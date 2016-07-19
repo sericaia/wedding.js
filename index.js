@@ -23,8 +23,8 @@ server.connection({
   port: SERVER_PORT
 });
 
-const pulgins = [Nes, Inert, Vision].concat(routes);
-server.register(pulgins, (err) => {
+const plugins = [Nes, Inert, Vision].concat(routes);
+server.register(plugins, (err) => {
   if (err) {
     throw err;
   }
