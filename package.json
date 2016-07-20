@@ -7,9 +7,9 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "start": "source upstart.env NODE_PATH=. node index.js",
-    "build": "source upstart.env webpack -p --progress",
-    "dev": "source upstart.env & webpack --progress --color --watch & source upstart.env NODE_PATH=. nodemon",
+    "start": "NODE_PATH=. node index.js",
+    "build": "webpack -p --progress",
+    "dev": "webpack --progress --color --watch & NODE_PATH=. nodemon",
     "lint": "semistandard --verbose | snazzy"
   },
   "pre-commit": [
