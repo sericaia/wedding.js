@@ -1,5 +1,5 @@
-/* global fetch */
 import React from 'react';
+import $ from 'jquery';
 
 const Slider = require('react-slick');
 
@@ -18,13 +18,9 @@ export default class PictureList extends React.Component {
   }
 
   componentDidMount () {
-    fetch(this.props.getAllPhotos.url, {
-      method: this.props.getAllPhotos.method
-    }).then((response) => {
-      return response.json();
-    }).then((data) => {
+    $.get(this.props.getAllPhotos.url, (data) => {
       this.setState({data: data});
-    }).catch((error) => {
+    }).fail((error) => {
       console.error(this.props.getAllPhotos, error.toString());
     });
 

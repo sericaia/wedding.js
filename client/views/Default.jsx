@@ -16,7 +16,7 @@ const Default = React.createClass({
           <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.3.15/slick.css' />
           <link rel='shortcut icon' href='/assets/logotipo.ico' />
         </head>
-        <body style={{backgroundColor: '#72a8ab'}}>
+        <body style={{backgroundColor: '#72a8ab', overflow: 'hidden'}}>
           <div id='app'></div>
           <script src='js/bundle.js'></script>
         </body>
