@@ -23,24 +23,26 @@ export default class WeddingApp extends React.Component {
   }
 
   getContentWrapperStyle () {
-    var contentWrapper = {
+    let contentWrapper = {
       backgroundColor: '#72a8ab',
       // display: '-ms-flex',
       display: '-webkit-flex',
       // display: 'flex',
-      padding: '30px 30px 0px 0px'
+      padding: '30px 30px 0px 0px',
+      overflow: 'hidden'
     };
 
     if (utils.isSmartPhone()) {
       contentWrapper.padding = '30px 30px 0px 30px';
       contentWrapper.flexDirection = 'column';
+      contentWrapper.overflow = 'visible';
     }
 
     return contentWrapper;
   }
 
   render () {
-    var isSmartPhone = utils.isSmartPhone();
+    const isSmartPhone = utils.isSmartPhone();
     return (
       <div>
         <div style={this.getContentWrapperStyle()}>
