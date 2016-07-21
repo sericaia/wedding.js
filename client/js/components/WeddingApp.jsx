@@ -1,4 +1,5 @@
 import React from 'react';
+import utils from '../../utils/utils.js';
 import PictureForm from './PictureForm.jsx';
 import PictureList from './PictureList.jsx';
 
@@ -9,13 +10,8 @@ export default class WeddingApp extends React.Component {
     this.state = {};
   }
 
-  isSmartPhone () {
-    var width = window.fakeInnerWidth || window.innerWidth;
-    return width <= 568;
-  }
-
   getPictureStyle () {
-    if (this.isSmartPhone()) {
+    if (utils.isSmartPhone()) {
       return {
         width: '100%'
       };
@@ -35,7 +31,7 @@ export default class WeddingApp extends React.Component {
       padding: '30px 30px 0px 0px'
     };
 
-    if (this.isSmartPhone()) {
+    if (utils.isSmartPhone()) {
       contentWrapper.padding = '30px 30px 0px 30px';
       contentWrapper.flexDirection = 'column';
     }
@@ -44,11 +40,14 @@ export default class WeddingApp extends React.Component {
   }
 
   render () {
+    var isSmartPhone = utils.isSmartPhone();
     return (
       <div>
         <div style={this.getContentWrapperStyle()}>
-          <div style={this.isSmartPhone() ? {width: '100%'} : {width: '30%'}}>
-            <img src='/assets/logotipo.png' style={{width: '100%'}} />
+          <div style={isSmartPhone ? {width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'} : {width: '30%'}}>
+            <img
+              src={isSmartPhone ? '/assets/logotipo_mobile.png' : '/assets/logotipo.png'}
+              style={isSmartPhone ? {width: '50%'} : {width: '100%'}} />
             <PictureForm />
           </div>
           <div style={this.getPictureStyle()}>

@@ -1,5 +1,6 @@
 /* global FormData, fetch */
 import React from 'react';
+import utils from '../../utils/utils.js';
 
 export default class PictureForm extends React.Component {
 
@@ -34,9 +35,22 @@ export default class PictureForm extends React.Component {
     // see https://github.com/whatwg/fetch/issues/27
   }
 
+  getContentWrapperStyle () {
+    var contentWrapper = {
+      display: 'flex',
+      justifyContent: 'center'
+    };
+
+    if (utils.isSmartPhone()) {
+      contentWrapper.width = '50%';
+    }
+    
+    return contentWrapper;
+  }
+
   render () {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={this.getContentWrapperStyle()}>
         <label type='button' className='btn btn-default' htmlFor='fileUpload' style={{backgroundColor: '#8EB9BC', border: '#4C7D80 solid 1px'}}>
           <span className='glyphicon glyphicon-camera' style={{fontSize: '50px'}}></span>
         </label>
