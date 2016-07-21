@@ -3,4 +3,4 @@ export default {
     const width = window.fakeInnerWidth || window.innerWidth;
     return width <= 568;
   }
-}
+};

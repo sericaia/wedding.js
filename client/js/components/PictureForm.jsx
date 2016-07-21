@@ -44,7 +44,7 @@ export default class PictureForm extends React.Component {
     if (utils.isSmartPhone()) {
       contentWrapper.width = '50%';
     }
-    
+
     return contentWrapper;
   }
 

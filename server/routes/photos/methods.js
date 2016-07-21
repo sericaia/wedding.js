@@ -1,5 +1,7 @@
 'use strict';
 
+const objectPath = require('object-path');
+const UUID = require('node-uuid');
 const path = require('path');
 const through2 = require('through2');
 const fs = require('fs');
@@ -25,7 +27,12 @@ methods.getPhotoByID = {
 
 methods.postPhoto = function (request, reply) {
   const dataFolder = './data';
-  const fileName = request.payload.fileUpload.hapi.filename;
+  let fileName;
+  if (!objectPath.has(request, 'payload.fileUpload.hapi.filename')) {
+    fileName = UUID.v1();
+  } else {
+    fileName = request.payload.fileUpload.hapi.filename;
+  }
   const path2 = path.join(dataFolder, fileName);
 
   // create output folder if it does not exist
