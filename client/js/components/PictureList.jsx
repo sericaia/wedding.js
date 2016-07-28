@@ -1,5 +1,6 @@
-import React from 'react';
 import $ from 'jquery';
+
+import React from 'react';
 
 const Slider = require('react-slick');
 
@@ -18,10 +19,15 @@ export default class PictureList extends React.Component {
   }
 
   componentDidMount () {
-    $.get(this.props.getAllPhotos.url, (data) => {
-      this.setState({data: data});
-    }).fail((error) => {
-      console.error(this.props.getAllPhotos, error.toString());
+    this.serverRequest = $.ajax({
+      url: this.props.getAllPhotos.url,
+      method: this.props.getAllPhotos.method,
+      success: (data) => {
+        this.setState({data: data});
+      },
+      error: (xhr, status, err) => {
+        console.error(this.props.getAllPhotos, status, err.toString());
+      }
     });
 
     this.client.connect((err) => {
@@ -44,8 +50,7 @@ export default class PictureList extends React.Component {
   }
 
   componentWillUnmount () {
-    // Its not yet possible to abort a fetch request
-    // see https://github.com/whatwg/fetch/issues/27
+    this.serverRequest.abort();
   }
 
   render () {

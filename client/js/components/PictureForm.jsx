@@ -1,4 +1,4 @@
-/* global FormData, fetch */
+import $ from 'jquery';
 import React from 'react';
 import utils from '../../utils/utils.js';
 
@@ -14,25 +14,22 @@ export default class PictureForm extends React.Component {
     let data = new FormData();
     data.append('fileUpload', e.target.files[0]);
 
-    fetch(this.props.postPhoto.url, {
+    this.serverRequest = $.ajax({
+      url: this.props.postPhoto.url,
       method: this.props.postPhoto.method,
       processData: false,
       contentType: false,
-      body: data
-    }).then((response) => {
-      if (response.ok) {
-        console.log('IMG SUBMITTED');
-      } else {
-        console.log('RESPONSE NOT OK');
+      data: data,
+      success: function (data) {
+      },
+      error: function (xhr, status, err) {
+        console.log('NOT SUBMITTED', status, err);
       }
-    }).catch(function (error) {
-      console.log('NOT SUBMITTED', error);
     });
   }
 
   componentWillUnmount () {
-    // Its not yet possible to abort a fetch request
-    // see https://github.com/whatwg/fetch/issues/27
+    this.serverRequest.abort();
   }
 
   getContentWrapperStyle () {
