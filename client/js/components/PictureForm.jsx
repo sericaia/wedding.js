@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import React from 'react';
 import utils from '../../utils/utils.js';
+import defaults from '../../../config/defaults';
 
 export default class PictureForm extends React.Component {
 
@@ -48,7 +49,7 @@ export default class PictureForm extends React.Component {
   render () {
     return (
       <div style={this.getContentWrapperStyle()}>
-        <label type='button' className='btn btn-default' htmlFor='fileUpload' style={{backgroundColor: '#8EB9BC', border: '#4C7D80 solid 1px'}}>
+        <label type='button' className='btn btn-default' htmlFor='fileUpload' style={{backgroundColor: defaults.colors.cameraIconBorder, border: `${defaults.colors.cameraIconBorder} solid 1px`}}>
           <span className='glyphicon glyphicon-camera' style={{fontSize: '50px'}}></span>
         </label>
         <input

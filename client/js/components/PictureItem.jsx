@@ -1,4 +1,5 @@
 import React from 'react';
+import defaults from '../../../config/defaults';
 
 export default class PictureItem extends React.Component {
 
@@ -17,7 +18,7 @@ export default class PictureItem extends React.Component {
     const width = document.getElementById('picItem').clientWidth;
     return this.setState({
       style: {
-        border: '#E90677 solid 2px',
+        border: `${defaults.colors.photoBorder} solid 2px`,
         marginLeft: 'auto',
         marginRight: 'auto',
         maxWidth: width,

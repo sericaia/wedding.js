@@ -6,6 +6,8 @@ const Slider = require('react-slick');
 
 import PictureItem from './PictureItem.jsx';
 
+import defaults from '../../../config/defaults';
+
 import Nes from 'nes';
 
 export default class PictureList extends React.Component {
@@ -72,7 +74,7 @@ export default class PictureList extends React.Component {
           <Slider {...settings}>
             {this.state.data.map((item) => {
               return (
-                <div id='picItem' ref={item} key={item} style={{backgroundColor: '#72a8ab'}}>
+                <div id='picItem' ref={item} key={item} style={{backgroundColor: defaults.colors.main}}>
                   <PictureItem item={item} />
                 </div>);
             })}

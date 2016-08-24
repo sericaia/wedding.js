@@ -3,6 +3,8 @@ import utils from '../../utils/utils.js';
 import PictureForm from './PictureForm.jsx';
 import PictureList from './PictureList.jsx';
 
+import defaults from '../../../config/defaults';
+
 export default class WeddingApp extends React.Component {
 
   constructor (props) {
@@ -24,7 +26,7 @@ export default class WeddingApp extends React.Component {
 
   getContentWrapperStyle () {
     let contentWrapper = {
-      backgroundColor: '#72a8ab',
+      backgroundColor: defaults.colors.main,
       // display: '-ms-flex',
       display: '-webkit-flex',
       // display: 'flex',
