@@ -8,4 +8,4 @@ module.exports = {
   logo: '/assets/logotipo.png',
   logoMobile: '/assets/logotipo_mobile.png',
   logoFavIco: '/assets/logotipo.ico'
-}
+};
