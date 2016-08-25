@@ -72,9 +72,9 @@ export default class PictureList extends React.Component {
       return (
         <div>
           <Slider {...settings}>
-            {this.state.data.map((item) => {
+            {this.state.data.map((item, index) => {
               return (
-                <div id='picItem' ref={item} key={item} style={{backgroundColor: defaults.colors.main}}>
+                <div id='picItem' ref={item} key={item + index} style={{backgroundColor: defaults.colors.main}}>
                   <PictureItem item={item} />
                 </div>);
             })}

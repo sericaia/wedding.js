@@ -24,20 +24,20 @@ export default class PictureForm extends React.Component {
       processData: false,
       contentType: false,
       data: data,
-      beforeSend: function() {
+      beforeSend: function () {
         that.setState({
           percentVal: 0
         });
-        console.log('>>> INITED!')
+        console.log('>>> INITED!');
       },
-      uploadProgress: function(event, position, total, percentComplete) {
-        console.log('>>> PROGRESS:', percentComplete)
+      uploadProgress: function (event, position, total, percentComplete) {
+        console.log('>>> PROGRESS:', percentComplete);
         that.setState({
           percentVal: percentComplete
         });
       },
-      complete: function(xhr) {
-        console.log('>>> FINISHED!')
+      complete: function (xhr) {
+        console.log('>>> FINISHED!');
         that.setState({
           percentVal: 100
         });
@@ -67,19 +67,41 @@ export default class PictureForm extends React.Component {
     return contentWrapper;
   }
 
+  renderProgressBar () {
+    if (this.state.percentVal > 0) {
+      return (
+        <div style={{
+          width: '100%',
+          padding: '5px'
+        }}>
+          <div className='progress' style={{width: '100%'}}>
+            <div className='progress-bar'
+              role='progressbar'
+              aria-valuenow={this.state.percentVal}
+              aria-valuemin='0'
+              aria-valuemax={this.props.progressValueMax}
+              style={{width: `${this.state.percentVal}%`}}>
+                {this.state.percentVal} %
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
   render () {
     return (
       <div style={this.getContentWrapperStyle()}>
         <div style={{
-         width: '100%',
-         textAlign: 'center',
-         marginBottom: '5px'
+          width: '100%',
+          textAlign: 'center',
+          marginBottom: '5px'
         }}>
           <label type='button'
             className='btn btn-default'
             htmlFor='fileUpload'
             style={{backgroundColor: defaults.colors.cameraIconBorder, border: `${defaults.colors.cameraIconBorder} solid 1px`}}>
-              <span className='glyphicon glyphicon-camera' style={{fontSize: '50px'}}></span>
+            <span className='glyphicon glyphicon-camera' style={{fontSize: '50px'}}></span>
           </label>
           <input
             type='file'
@@ -90,22 +112,7 @@ export default class PictureForm extends React.Component {
             style={{display: 'none'}}
             onChange={this.handleChange.bind(this)} />
         </div>
-        <div style={{
-         width: '100%',
-         padding: '5px'
-        }}>
-          <div className="progress" style={{width: '100%'}}>
-            <div className="progress-bar"
-              role="progressbar"
-              aria-valuenow={this.state.percentVal}
-              aria-valuemin="0"
-              aria-valuemax={this.props.progressValueMax}
-              style={{width: `${this.state.percentVal}%`}}>
-                {this.state.percentVal} %
-            </div>
-          </div>
-        </div>
-
+        {this.renderProgressBar()}
       </div>
     );
   }
